@@ -45,3 +45,27 @@ map.h:18:33: note: expected ‘void *’ but argument is of type ‘const char *
       |                           ~~~~~~^~~
 cc1: all warnings being treated as errors
 e586d5b
+Thu May 14 08:15:14 PM UTC 2026: 
+ graph.c | 10 ----------
+ 1 file changed, 10 deletions(-)
+Compilation failed
+test.c: In function ‘addNode’:
+test.c:279:5: error: ‘main’ is normally a non-static function [-Werror=main]
+  279 | int main(int argc, char *argv[]) {
+      |     ^~~~
+test.c:303:1: error: expected declaration or statement at end of input
+  303 | }
+      | ^
+test.c:15:6: error: unused variable ‘msg’ [-Werror=unused-variable]
+   15 | char msg[500];
+      |      ^~~
+test.c: At top level:
+test.c:279:5: error: ‘main’ defined but not used [-Werror=unused-function]
+  279 | int main(int argc, char *argv[]) {
+      |     ^~~~
+In file included from test.c:5:
+graph.c:61:7: error: ‘getAdjacentLabels’ defined but not used [-Werror=unused-function]
+   61 | List* getAdjacentLabels(Graph* g, const char* label) {
+      |       ^~~~~~~~~~~~~~~~~
+cc1: all warnings being treated as errors
+0ee960c
