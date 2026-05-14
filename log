@@ -104,3 +104,22 @@ map.h:18:33: note: expected ‘void *’ but argument is of type ‘const char *
       |                           ~~~~~~^~~
 cc1: all warnings being treated as errors
 706c55d
+Thu May 14 08:20:23 PM UTC 2026: 
+ graph.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+Compilation failed
+In file included from test.c:5:
+graph.c: In function ‘createGraph’:
+graph.c:33:8: error: expected identifier before ‘*’ token
+   33 |     g->*adjacencyMap = map_create(is_equal_string);
+      |        ^
+graph.c: In function ‘addNode’:
+graph.c:44:33: error: passing argument 2 of ‘map_insert’ discards ‘const’ qualifier from pointer target type [-Werror=discarded-qualifiers]
+   44 |     map_insert(g->adjacencyMap, label, edgesList);
+      |                                 ^~~~~
+In file included from graph.c:8:
+map.h:18:33: note: expected ‘void *’ but argument is of type ‘const char *’
+   18 | void map_insert(Map *map, void *key, void *value);
+      |                           ~~~~~~^~~
+cc1: all warnings being treated as errors
+0d29b0a
