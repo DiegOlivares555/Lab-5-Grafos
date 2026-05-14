@@ -33,7 +33,7 @@ Graph* createGraph() {
     if (!g->adjacencyMap){
         free(g);
     }
-    return NULL;
+    return g;
 }
 
 void addNode(Graph* g, const char* label) {
