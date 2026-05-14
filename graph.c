@@ -15,6 +15,7 @@
 struct Graph {
     // Un solo mapa basta: Llave (char* label) -> Valor (List* de Edge*)
     Map* adjacencyMap; 
+    
 };
 
 // Función auxiliar para comparar strings en el mapa
@@ -36,13 +37,12 @@ Graph* createGraph() {
     return g;
 }
 
+
 void addNode(Graph* g, const char* label) {
-    if (!g || !label){
-        return;
-    }else{
-        List* edgesList = list_create();
-        map_insert(g->adjacencyMap, label, edgesList);
-    }
+    if (!g || !label)return;
+    List* edgesList = list_create();
+    map_insert(g->adjacencyMap, label, edgesList);
+
 }
 
 void addEdge(Graph* g, const char* src, const char* dest, int weight) {
