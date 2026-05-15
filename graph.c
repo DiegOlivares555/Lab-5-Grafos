@@ -42,24 +42,20 @@ void addNode(Graph* g, const char* label) {
     if (!g || !label) return;
     // Si el nodo ya existe, no hacer nada
     if (map_search(g->adjacencyMap, label) != NULL) return;
-    // Crear una nueva lista de aristas para el nodo
     List* edgesList = list_create();
     if (!edgesList) return;
-    // Insertar el nodo en el mapa
-    map_insert(g->adjacencyMap, strdup(label), edgesList);
-
-    // Si el nodo no existe, se crea con una lista vacía de aristas
-    map_insert(g->adjacencyMap, strdup(label), list_create());
-
-    // Si el nodo ya existe, no hacer nada
-    if (map_search(g->adjacencyMap, label) != NULL) return;
-    // Crear una nueva lista de aristas para el nodo
-    List* edgesList = list_create();
+    map_insert(g->adjacencyMap, strdup(label), edgesList);    
 }
 
 void addEdge(Graph* g, const char* src, const char* dest, int weight) {
     if (!g || !src || !dest) return;
-
+    List* edgesList = (List*)map_search(g->adjacencyMap, (void*)src);
+    if (!edgesList) return;
+    Edge* newEdge = (Edge*)malloc(sizeof(Edge));
+    if (!newEdge) return;
+    newEdge->target = strdup(dest);
+    newEdge->weight = weight;
+    list_pushBack(edgesList, newEdge);
 }
 
 List* getEdges(Graph* g, const char* label) {
@@ -78,9 +74,15 @@ int getWeight(Graph* g, const char* label1, const char* label2) {
 // Retorna una nueva List* que contiene elementos de tipo char* (las etiquetas)
 List* getAdjacentLabels(Graph* g, const char* label) {
     if (!g || !label) return NULL;
-
-
-    return NULL; 
+    List* edgesList = (List*)map_search(g->adjacencyMap, (void*)label);
+    if (!edgesList) return NULL;
+    List* labelsList = list_create();
+    Edge* e = (Edge*)list_first(edgesList);
+    while (e != NULL){
+        list_pushBack(labelsList, strdup(e->target));
+        e = (Edge*)list_next(edgesList);
+    }
+    return labelsList; 
 }
 
 void destroyGraph(Graph* g) {
