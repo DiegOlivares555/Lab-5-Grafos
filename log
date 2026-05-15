@@ -128,3 +128,33 @@ Thu May 14 08:23:16 PM UTC 2026:
  1 file changed, 6 insertions(+), 9 deletions(-)
  tests:  0|0
 e94c7de
+Fri May 15 01:05:48 AM UTC 2026: 
+ graph.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+Compilation failed
+In file included from test.c:5:
+graph.c: In function ‘addNode’:
+graph.c:44:37: error: passing argument 2 of ‘map_search’ discards ‘const’ qualifier from pointer target type [-Werror=discarded-qualifiers]
+   44 |     if (map_search(g->adjacencyMap, label) != NULL) return;
+      |                                     ^~~~~
+In file included from graph.c:8:
+map.h:22:37: note: expected ‘void *’ but argument is of type ‘const char *’
+   22 | MapPair *map_search(Map *map, void *key);
+      |                               ~~~~~~^~~
+graph.c:55:37: error: passing argument 2 of ‘map_search’ discards ‘const’ qualifier from pointer target type [-Werror=discarded-qualifiers]
+   55 |     if (map_search(g->adjacencyMap, label) != NULL) return;
+      |                                     ^~~~~
+map.h:22:37: note: expected ‘void *’ but argument is of type ‘const char *’
+   22 | MapPair *map_search(Map *map, void *key);
+      |                               ~~~~~~^~~
+graph.c:57:11: error: redefinition of ‘edgesList’
+   57 |     List* edgesList = list_create();
+      |           ^~~~~~~~~
+graph.c:46:11: note: previous definition of ‘edgesList’ with type ‘List *’
+   46 |     List* edgesList = list_create();
+      |           ^~~~~~~~~
+graph.c:57:11: error: unused variable ‘edgesList’ [-Werror=unused-variable]
+   57 |     List* edgesList = list_create();
+      |           ^~~~~~~~~
+cc1: all warnings being treated as errors
+52f1474

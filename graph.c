@@ -40,6 +40,21 @@ Graph* createGraph() {
 
 void addNode(Graph* g, const char* label) {
     if (!g || !label) return;
+    // Si el nodo ya existe, no hacer nada
+    if (map_search(g->adjacencyMap, label) != NULL) return;
+    // Crear una nueva lista de aristas para el nodo
+    List* edgesList = list_create();
+    if (!edgesList) return;
+    // Insertar el nodo en el mapa
+    map_insert(g->adjacencyMap, strdup(label), edgesList);
+
+    // Si el nodo no existe, se crea con una lista vacía de aristas
+    map_insert(g->adjacencyMap, strdup(label), list_create());
+
+    // Si el nodo ya existe, no hacer nada
+    if (map_search(g->adjacencyMap, label) != NULL) return;
+    // Crear una nueva lista de aristas para el nodo
+    List* edgesList = list_create();
 }
 
 void addEdge(Graph* g, const char* src, const char* dest, int weight) {
