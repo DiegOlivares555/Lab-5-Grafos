@@ -40,7 +40,6 @@ Graph* createGraph() {
 
 void addNode(Graph* g, const char* label) {
     if (!g || !label) return;
-    // Si el nodo ya existe, no hacer nada
     if (map_search(g->adjacencyMap, (void*)label) != NULL) return;
     List* edgesList = list_create();
     if (!edgesList) return;
