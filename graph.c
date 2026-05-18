@@ -66,12 +66,14 @@ List* getEdges(Graph* g, const char* label) {
 
 int getWeight(Graph* g, const char* label1, const char* label2) {
     if (!g || !label1 || !label2) return -1;
+
     List* edgesList = (List*)map_search(g->adjacencyMap, (void*)label1);
     if (!edgesList) return -1;
+
     Edge* e = (Edge*)list_first(edgesList);
     while (e != NULL) {
-        if (strcmp(e->target, label2) == 0) {
-            return e->weight; // Encontrado, retornamos el peso
+        if (e->target && strcmp(e->target, label2) == 0) {
+            return e->weight; 
         }
         e = (Edge*)list_next(edgesList);
     }
