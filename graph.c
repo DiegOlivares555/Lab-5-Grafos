@@ -41,7 +41,7 @@ Graph* createGraph() {
 void addNode(Graph* g, const char* label) {
     if (!g || !label) return;
     // Si el nodo ya existe, no hacer nada
-    if (map_search(g->adjacencyMap, label) != NULL) return;
+    if (map_search(g->adjacencyMap, (void*)label) != NULL) return;
     List* edgesList = list_create();
     if (!edgesList) return;
     map_insert(g->adjacencyMap, strdup(label), edgesList);    
